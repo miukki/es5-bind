@@ -58,12 +58,16 @@ console.log('no memory leak', String(sum(1)(1)), String(sum(1)(1)));
 
 //other solutin
 function tickF(n) {
+
  var y = function(m) {
-  return tickF(m+n);
- };
+  return f(m+n);
+ }, f = arguments.callee;
  y.toString = y.valueOf = function () {
   return n;
  };
  return y;
 }
 console.log('no memory leak', String(tickF(1)(2)(3)), String(tickF(1)(2)(3)))
+
+
+

@@ -1,4 +1,5 @@
 //unflatten array
+//its didnt work i should improve.
 var people =  [
     {
         "id": "12",
@@ -36,7 +37,7 @@ var unflatten = function(arr, parent, tree) {
 console.log(people.map(function(item){return unflatten(people, {id: item.id}).childrens.length ? unflatten(people, {id: item.id}) : undefined }))
 
 
-//horizontal sort verian 1 with sort
+//horizontal sort
 var data = {
     text: "zero",
     childrens: [
