@@ -83,7 +83,7 @@ var data = {
 
 
 //horizontal sort
-var fn = function(data, tree, level) {
+var fnSort = function(data, tree, level) {
   level = typeof level !== 'undefined' ? level : 0;
   tree = typeof tree !== 'undefined' ? tree : [];
 
@@ -100,4 +100,5 @@ var fn = function(data, tree, level) {
 
 }
 
-//console.log('result: ' + fn(data));
+//console.log('result: ' + fnSort(data));
+
