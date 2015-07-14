@@ -20,7 +20,7 @@ var tick = (function(){
   var total = 0;
   function fnGenerator(arg) {
     total += arg;
-    return  fnGenerator;
+    return  arguments.callee;
   }
 
   fnGenerator.toString = function(){ return total;}
@@ -66,4 +66,4 @@ function tickF(n) {
  };
  return y;
 }
-console.log(String(tickF(1)(2)(3)), String(tickF(1)(2)(3)))
+console.log('no memory leak', String(tickF(1)(2)(3)), String(tickF(1)(2)(3)))
