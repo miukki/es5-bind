@@ -54,3 +54,16 @@ var sum = function (toSum) {
     return new Sum().sum(toSum);
 };
 console.log('no memory leak', String(sum(1)(1)), String(sum(1)(1)));
+
+
+//other solutin
+function tickF(n) {
+ var y = function(m) {
+  return tick(m+n);
+ };
+ y.toString = y.valueOf = function () {
+  return n;
+ };
+ return y;
+}
+tickF(1)(2)(3)
