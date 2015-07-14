@@ -13,17 +13,7 @@ if (!Function.prototype.bind) {
 
 
 
-/*
- * Create a function 'tick' which prints consecutive numbers,
- * starting from 0.
- * Do not use any other global names except 'tick'.
- */
- /*
- * Example:
- * tick(); // prints 0
- * tick(); // prints 1
- * tick(); // prints 2
- */
+
 
 var tick = (function() {
     var count= 0;
@@ -34,7 +24,6 @@ var tick = (function() {
 
 ---------------------------------------
 
-// Without running the following code, tell me what will be printed:
 
 (function(){
     var x = "abc";
@@ -46,30 +35,9 @@ var tick = (function() {
 })();
 
 
-//!!!!if in code
-
-fn() //we will get error fn is not a function
-var fn = function() {}
-
-//!!!!but if
-
-fn() //everything will be alright
-function fn () {}
-
-/*
-the reason is called “hoisting” in javascript.
-It means that variables declarations go to the top of the scope.
-But variable assignments stay in the original line”.
-So this: var y = x; var x = “abc”, is equivalent to this: var y; var x; y = x; x = “abc”.
-and this is why we get y === undefined.
-*/
 
 
 ----------------------------------------------
-
-// write a function 'sum' that takes an arbitrary number of arguments
-// and calculates the sum of them.
-// examples:
 // sum(1, -1) returns 0
 // sum (100, 200, 1) returns 301
 
