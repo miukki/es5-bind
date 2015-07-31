@@ -15,6 +15,8 @@ for (var i = 0; i < arr.length; i++) {
   }).call(arr[i], i);
 }
 
+
+
 //chain call fn()()()
 var tick = (function(){
   var total = 0;
@@ -59,15 +61,35 @@ console.log('no memory leak', String(sum(1)(1)), String(sum(1)(1)));
 //other solutin
 function tickF(n) {
 
- var y = function(m) {
+ var f = arguments.callee,
+ y = function(m) {
   return f(m+n);
- }, f = arguments.callee;
+ };
  y.toString = y.valueOf = function () {
   return n;
  };
  return y;
 }
-console.log('no memory leak', String(tickF(1)(2)(3)), String(tickF(1)(2)(3)))
+console.log('no memory leak!', String(tickF(1)(2)(3)), String(tickF(1)(2)(3)))
+
+
+
+
+// inspired by http://www.crockford.com/javascript/www_svendtofte_com/code/curried_javascript/index.html
+function add(){
+  var args = Array.prototype.slice.call(arguments);
+  var f = function(num){
+    return add.apply(null, args.concat([num]));
+  };
+  f.toString = f.valueOf = function(){
+    return args.reduce(function(prev, curr){
+      return prev + curr;
+    }, 0);
+  };
+  return f;
+}
+
+console.log('!', String(add(5)(5)(5)));
 
 
 
