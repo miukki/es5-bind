@@ -1,3 +1,41 @@
+//$
+
+var $ = function $(param) {
+        if (this instanceof $) {
+            A[pr].forEach.call(arguments, function (arg) {
+                this.add(arg);
+            }, this);
+        } else {
+            return new $(param);
+        }
+    };
+
+    $[pr] = [];
+    $[pr][c] = $;
+    var p = $.prototype;
+
+    ["addClass", "removeClass", "toggleClass", "removeAttr"].forEach(function (method) {
+        p[method] = function (className) {
+            this._toAll(method, [className]);
+            return this;
+        };
+    });
+
+    ["val", "html", "width", "height"].forEach(function (method) {
+        p[method] = function (val) {
+            return this._setOrGet(method, val);
+        }
+    });
+
+    ["attr"].forEach(function (method) {
+        p[method] = function (name, value) {
+            return this._setOrGet(method, value, name);
+        }
+    });
+
+//try $('.list').removeClass('like');
+
+
 //unflatten array
 //its didnt work i should improve.
 var people =  [
