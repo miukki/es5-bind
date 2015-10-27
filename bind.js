@@ -11,10 +11,7 @@ if (!Function.prototype.bind) {
 }
 
 
-
-
-
-
+//closure
 var tick = (function() {
     var count= 0;
     return function () {
@@ -24,13 +21,12 @@ var tick = (function() {
 
 ---------------------------------------
 
-
+//{?}
 (function(){
     var x = "abc";
     (function(){
         var y = x;
         var x = "123";
-        console.log(y); // ??? undefined
     })();
 })();
 
@@ -43,16 +39,18 @@ var tick = (function() {
 
 function sum() {
     var sum = 0;
-    var arr =  Array.prototype.slice.apply(arguments);
+    var arr =  [].slice.apply(arguments);//Array-like objects to Array
     for(var i=0; i< arr.length; i++) {
         sum += arr[i];
     }
     return sum;
 }
+sum(-1,1,5,6,7);
 
 //es-5
 [0, 1, 2, 3, 4].reduce(function(previousValue, currentValue, index, array) {
   return previousValue + currentValue;
 });
 
+----------------------------------------------
 
