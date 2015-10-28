@@ -4,6 +4,10 @@ var data = {
     text: "y",
     childrens: [
         {
+            text: 'x',
+            childrens: []
+        },
+        {
             text: 'a',
             childrens: [
                 {
@@ -46,24 +50,30 @@ var data = {
 
 
 //horizontal sort (to flat array)
-var fnSort = function(data, tree, level) {
-  level = typeof level !== 'undefined' ? level : 0;
-  tree = typeof tree !== 'undefined' ? tree : [];
+var my = function(data) {
 
-  tree.push({text: data['text'], level: level});
+  function fnSort(data, tree, level, isRoot) {
 
-  if (data.childrens && data.childrens.length ) {
-    level++; data.childrens.forEach(function(el) {fnSort(el, tree, level)});
+      tree.push({text: data['text'], level: level});
+
+      if (data.childrens && data.childrens.length ) {
+        level++;
+        data.childrens.forEach(function(el) {
+            fnSort(el, tree, level)
+        });
+      }
+
+      if (isRoot){
+        return tree.sort(function(a,b){
+          if (a.level < b.level) return -1
+          if (a.level > b.level) return 1
+          return 0;
+          });
+      }
   }
 
-  return JSON.stringify(tree.sort(function(a,b){
-    if (a.level < b.level) return -1
-    if (a.level > b.level) return 1
-    return 0;
-    })
-  );
-
+  return fnSort(data, [], 0, true);
 }
 
-console.log('result: ' + fnSort(data));
+console.log('result: ' + JSON.stringify(my(data)));
 
