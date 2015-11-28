@@ -33,12 +33,6 @@ var tick = (function(){
 
 console.log('memory leak', String(tick(1)(1)), String(tick(1)(1)))
 
-//chain call fn()()()
-var m = function(arg){
-  m.total = (m.total || 0) + arg;
-  return m
-}
-console.log(m(5)(6).total)
 
 //without memory leack
 var sum = function (toSum) {
