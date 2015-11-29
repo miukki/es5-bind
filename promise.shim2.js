@@ -32,7 +32,7 @@ MyPromise.prototype.reject = function (arg) {
 
 MyPromise.prototype.then = function (success, error) {
     if (this._isComplete) {
-        //if catch was before
+        //e.g if .catch fired
         return;
     } else {
         if (success) this._successCallbacks.push(success);
