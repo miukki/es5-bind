@@ -24,7 +24,7 @@ var people =  [
 ]
 
     var arrayToTree = function (arr, cb) {
-        arr = arr.slice();
+        arr = arr.slice();//copy
 
         function getRoot(arr) {
             var index;
