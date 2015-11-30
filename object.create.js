@@ -8,7 +8,13 @@ if (!Object.create){
 }
 
 
-function Constructor() { this.tets = function(){}}
-o = new Constructor();
-// is not equivalent to:
-o = Object.create(Constructor.prototype);
+var o2 = Object.create({}, {
+  p: {
+    value: 42,
+    writable: true,
+    enumerable: true,
+    configurable: true
+  }
+});
+
+var o = Object.create({}, { p: { value: 42 } });

@@ -1,32 +1,69 @@
-function NewPromise(executorFn) {
-  executorFn.call(this, this._resolver.bind(this), this._rejector.bind(this));
-}
-NewPromise.prototype.then = function(fn){
-  console.log('fn', fn)
-  this._then = fn;
-  return this;
-}
-NewPromise.prototype._rejector = function(){}
+var MyPromise = function (callback) {
+    this._isComplete = false;
+    this._isSuccess = false;
+    this._successCallbacks = [];
+    this._errorCallbacks = [];
+    this._data = undefined;
+    try {
+        callback(this.resolve.bind(this), this.reject.bind(this));
+    } catch (e) {
+        console.error(e);
+        this.reject(e);
+    }
+};
 
-NewPromise.prototype._resolver = function(args){
-  this.then = this._then.bind(null, args)
-  this.then();
-}
+MyPromise.prototype.resolve = function (arg) {
+    if (!this._isComplete) {
+        this._data = arg;
+        //this._isComplete = true;
+        this._isSuccess = true;
+        this._start();
+    }
+};
 
-//promise.shim
-var p = new NewPromise(function (resolve, reject) {
-   setTimeout( function(){
-    resolve('test')
-   }, 200);
+MyPromise.prototype.reject = function (arg) {
+    if (!this._isComplete) {
+        this._data = arg;
+        //this._isComplete = true;
+        this._isSuccess = false;
+        this._start();
+    }
+};
+
+MyPromise.prototype.then = function (success, error) {
+    if (this._isComplete) {
+        //e.g if .catch fired
+        return;
+    } else {
+        if (success) this._successCallbacks.push(success);
+        if (error) this._errorCallbacks.push(error);
+    }
+    return this;
+};
+
+MyPromise.prototype._start = function () {
+    if (this._isSuccess) {
+        this._successCallbacks.forEach(this._itar, this);
+    } else {
+        this._errorCallbacks.forEach(this._itar, this);
+    }
+    this._successCallbacks = [];
+    this._errorCallbacks = [];
+};
+
+MyPromise.prototype._itar = function (cb) {
+    var r = cb(this._data);
+
+    if(r){
+        this._data = r;
+    }
+};
+
+
+new MyPromise(function (resolve) {
+    setTimeout(resolve.bind(null, 'ay'), 1000);
 }).then(function (res) {
-  return res+' test';
+    return res+'!';
+}).then(function(res){
+    console.log(res)
 });
-
-
-/*
-.catch(function(){
-  console.log('reject!');
-})
-*/
-
-
