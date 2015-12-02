@@ -17,9 +17,13 @@ function MyClass() {
 }
 
 MyClass.prototype = Object.create(SuperClass.prototype); // inherit
-$.extend(MyClass.prototype, OtherSuperClass.prototype); // mixin
+
+//and then mixin:
+MyClass.prototype['othersuper'] = OtherSuperClass['othersuper'];
+
 
 MyClass.prototype.myMethod = function() {
   // do a thing
 };
 var cl = new MyClass();
+console.log(cl)
