@@ -1,3 +1,4 @@
+//https://addyosmani.com/blog/writing-polyfills/
 //create shim for bind
 
 if (!Function.prototype.bind) {
@@ -40,7 +41,7 @@ var retrieveX = module.getX;
 //retrieveX(); // 9, because in this case, "this" refers to the global object
 
 // Create a new function with 'this' bound to module
-//New programmers (like myself) might confuse the global var getX with module's property getX
+// might confuse the global var getX with module's property getX
 var boundGetX = retrieveX.bind(module);
 console.log(boundGetX()); // 81
 

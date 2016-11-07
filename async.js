@@ -7,7 +7,7 @@ var pool = function () {
             var count = 0;
             return function () {
                 count++;
-                return count * 1000;
+                return count * 1000;//(Math.floor(Math.random() * (max - min + 1)) + min)
             }
         })();
 
@@ -28,8 +28,6 @@ var pool = function () {
 }
 
 //несколько попыток без увеличения времени
-
-
 var request = function (options, callback, errorCallback, count) {
       $.ajax(options).then(callback).fail(function (data) {
           if (count) {
@@ -44,8 +42,7 @@ request({url: '', data: {}, type: 'GET'}, function () {alert('success')}, functi
 
 
 
-// последний пример
-
+// where $.get emitate server
 var $ = {
         get: function () {
 

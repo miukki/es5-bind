@@ -1,6 +1,6 @@
 Object.prototype.each = function(f) {
   for (var prop in this) {
-    //if (!this.hasOwnProperty(prop)) continue;
+    if (!this.hasOwnProperty(prop)) continue;
     var value = this[prop];
     f.call(this, prop, value);
   }
@@ -17,6 +17,7 @@ var user = {
   age: 25
 };
 
+//emitate Object.keys
 user.each(function(prop, val) {
   console.log( '!', prop, val ); // name -> age -> (!) each
 });
